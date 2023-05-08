@@ -10,5 +10,10 @@
     "require": {
         "silverstripe/framework": "^4",
         "silverstripe/siteconfig": "^4"
+    },
+    "extra": {
+        "expose": [
+            "js"
+        ]
     }
 }
