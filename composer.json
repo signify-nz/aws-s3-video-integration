@@ -1,0 +1,14 @@
+{
+    "name": "signify-nz/aws-s3-video-integration",
+    "description": "CMS Video adminstration for AWS S3 Videos and Buckets",
+    "type": "silverstripe-vendormodule",
+    "homepage": "https://github.com/signify-nz/aws-s3-video-integration",
+    "keywords": ["silverstripe", "video", "s3", "aws"],
+    "authors": [
+        {"name": "Signify","homepage": "http://signify.co.nz"}
+    ],
+    "require": {
+        "silverstripe/framework": "^4",
+        "silverstripe/siteconfig": "^4"
+    }
+}
