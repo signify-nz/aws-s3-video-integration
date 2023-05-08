@@ -1,3 +1,10 @@
 ---
 Name: aws-s3-video-integration
 ---
+SilverStripe\AssetAdmin\Forms\RemoteFileFormFactory:
+  extensions:
+    - Signify\Extensions\RemoteFileFormExtension
+
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - Signify\Extensions\AwsVideoLeftAndMainExtension
