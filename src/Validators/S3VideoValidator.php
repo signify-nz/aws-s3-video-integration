@@ -4,7 +4,7 @@ namespace Signify\Validators;
 use SilverStripe\Forms\RequiredFields;
 
 /**
- * Validator for the {@link Signify\S3Video} object
+ * Validator for the {@link Signify\Models\S3Video} object
  *
  * Validates the BucketID independently of the required fields. If BucketID
  * were validated as a standard required field, the implicit behaviour of S3Videos
