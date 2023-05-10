@@ -17,7 +17,6 @@ class S3VideoValidator extends RequiredFields
     {
         $valid = parent::php($data);
 
-        $fields = $this->form->Fields();
         if (empty($data['BucketID'])) {
             $message = "Bucket is required.";
             $this->result->addFieldError('BucketID', $message);
