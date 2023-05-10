@@ -64,27 +64,27 @@ class S3Video extends DataObject
         ]);
 
 
-        if(S3Bucket::get()->count() === 1) {
+        if (S3Bucket::get()->count() === 1) {
             $bucket->addExtraClass('hidden');
         }
 
         $awsFields = CompositeField::create(
-                $objectKey,
-                $bucket
-            )->setTitle('Details for AWS hosted video');
+            $objectKey,
+            $bucket
+        )->setTitle('Details for AWS hosted video');
 
         $fields->insertAfter('Name', $awsFields);
 
         $awsPreview = LiteralField::create(
-                'AWSPreview',
-                '<div class="form-group field"><h3 class="form__field-label">Video preview</h3>'
-                    . '<div class="form__field-holder"><p class="stacked"><em>'
-                    . 'If the preview does not show the correct video then the Object Key or Bucket details are '
-                    . 'incorrect, or the settings on the S3 Bucket in AWS may not allow access from this domain.'
-                    . '</br>Preview will update when saved.</em></p>'
-                    . '<video src="' . $this->getVideoLink() . '" width="320px" height="auto" controls></video>'
-                    . '</div></div>'
-            )->setTitle('Preview');
+            'AWSPreview',
+            '<div class="form-group field"><h3 class="form__field-label">Video preview</h3>'
+            . '<div class="form__field-holder"><p class="stacked"><em>'
+            . 'If the preview does not show the correct video then the Object Key or Bucket details are '
+            . 'incorrect, or the settings on the S3 Bucket in AWS may not allow access from this domain.'
+            . '</br>Preview will update when saved.</em></p>'
+            . '<video src="' . $this->getVideoLink() . '" width="320px" height="auto" controls></video>'
+            . '</div></div>'
+        )->setTitle('Preview');
 
         $fields->addFieldToTab('Root.Main', $awsPreview);
         return $fields;
