@@ -18,7 +18,8 @@ class RemoteFileFormExtension extends Extension
     {
         if ($context['type'] === 'create') {
             $form->Fields()->dataFieldByName('Url')->addExtraClass('js-url-embed-field');
-            $form->Fields()->insertAfter('Url',
+            $form->Fields()->insertAfter(
+                'Url',
                 DropdownField::create(
                     'Url_Aws',
                     'Select AWS hosted video',
