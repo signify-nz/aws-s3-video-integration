@@ -11,22 +11,14 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 class VideoAdmin extends ModelAdmin
 {
-    /**
-     * @var array
-     */
+
     private static $managed_models = [
         S3Video::class => ['title' => 'Videos'],
         S3Bucket::class => ['title' => 'S3 Buckets'],
     ];
 
-    /**
-     * @var string
-     */
     private static $url_segment = 'videos';
 
-    /**
-     * @var string
-     */
     private static $menu_title = 'Videos';
 
     protected function getGridFieldConfig(): GridFieldConfig
