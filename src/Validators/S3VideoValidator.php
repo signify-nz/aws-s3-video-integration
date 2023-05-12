@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Signify\Validators;
 
 use SilverStripe\Forms\RequiredFields;
