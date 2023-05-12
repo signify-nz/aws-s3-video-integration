@@ -9,7 +9,8 @@
     ],
     "require": {
         "silverstripe/framework": "^4",
-        "silverstripe/siteconfig": "^4"
+        "unclecheese/display-logic": "^2",
+        "symbiote/silverstripe-gridfieldextensions": "^3"
     },
     "extra": {
         "expose": [
