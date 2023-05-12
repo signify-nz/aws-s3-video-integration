@@ -61,7 +61,6 @@ class S3Video extends DataObject
             'BucketID',
         ]);
 
-
         if (S3Bucket::get()->count() === 1) {
             $bucket->addExtraClass('hidden');
         }
