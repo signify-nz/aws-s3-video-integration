@@ -11,6 +11,9 @@ use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
+/**
+ * An AWS S3 Video
+ */
 class S3Video extends DataObject
 {
     private static $table_name = 'S3Video';
