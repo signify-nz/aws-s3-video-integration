@@ -7,6 +7,7 @@ use Signify\Validators\S3VideoValidator;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
@@ -37,7 +38,7 @@ class S3Video extends DataObject
         'Bucket' => S3Bucket::class,
     ];
 
-    public function getCMSFields()
+    public function getCMSFields() : FieldList
     {
         $fields = parent::getCMSFields();
 
@@ -101,7 +102,7 @@ class S3Video extends DataObject
         return $validator;
     }
 
-    public function getVideoLink()
+    public function getVideoLink() : string
     {
         if ($this->Bucket()->getBucketLink() && $this->ObjectKey) {
             $parts = [
