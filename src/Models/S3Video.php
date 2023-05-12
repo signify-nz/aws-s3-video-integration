@@ -25,17 +25,11 @@ class S3Video extends DataObject
         Versioned::class,
     ];
 
-    /**
-     * @var array
-     */
     private static $db = [
         'Name' => 'Varchar(255)',
         'ObjectKey' => 'Varchar(255)',
     ];
 
-    /**
-     * @var array
-     */
     private static $has_one = [
         'Bucket' => S3Bucket::class,
     ];
