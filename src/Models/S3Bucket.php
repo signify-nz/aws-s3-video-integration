@@ -22,17 +22,11 @@ class S3Bucket extends DataObject
 
     private static $description = 'Connection details for an AWS S3 bucket';
 
-    /**
-     * @var array
-     */
     private static $db = [
         'Domain' => 'Varchar(255)',
         'Sort' => 'Int'
     ];
 
-    /**
-     * @var array
-     */
     private static $has_many = [
         'Videos' => S3Video::class
     ];
