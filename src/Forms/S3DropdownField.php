@@ -14,10 +14,10 @@ use Signify\Models\S3Video;
 class S3DropdownField extends DropdownField
 {
     public function __construct(
-        $name,
-        $title = null,
-        $source = null,
-        $value = "",
+        string $name,
+        string | null $title = null,
+        array $source = null,
+        mixed $value = "",
     ) {
         $source = $source ?? S3Video::get()->map('ID', 'Name')->toArray();
                 
