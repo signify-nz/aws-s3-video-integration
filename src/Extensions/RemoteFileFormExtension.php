@@ -22,7 +22,7 @@ class RemoteFileFormExtension extends Extension
             $form->Fields()->insertAfter(
                 'Url',
                 DropdownField::create(
-                    'Url_Aws',
+                    'UrlAws',
                     'Select AWS hosted video',
                     S3Video::get()->map('VideoLink', 'Name')
                 )->setEmptyString('-- Select AWS Hosted Video --')
