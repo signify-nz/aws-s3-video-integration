@@ -9,10 +9,10 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\Form;
 
 /**
-* Extends the form used for remote files add in TinyMCE field
-*
-* Add option to select S3Video object instead of entering URL
-*/
+ * Extends the form used for remote files add in TinyMCE field
+ *
+ * Add option to select S3Video object instead of entering URL
+ */
 class RemoteFileFormExtension extends Extension
 {
     
