@@ -8,6 +8,9 @@ use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
 
+/**
+ * An AWS S3 Bucket
+ */
 class S3Bucket extends DataObject
 {
 
