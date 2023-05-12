@@ -15,6 +15,7 @@ use SilverStripe\Forms\Form;
 */
 class RemoteFileFormExtension extends Extension
 {
+    
     public function updateForm(Form $form, $controller, $name, $context)
     {
         if ($context['type'] === 'create') {
