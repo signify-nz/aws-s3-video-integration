@@ -8,7 +8,8 @@
         {"name": "Signify","homepage": "http://signify.co.nz"}
     ],
     "require": {
-        "silverstripe/framework": "^4"
+        "silverstripe/framework": "^4",
+        "unclecheese/display-logic": "^2"
     },
     "extra": {
         "expose": [
