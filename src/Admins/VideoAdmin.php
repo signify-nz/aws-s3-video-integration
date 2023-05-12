@@ -9,6 +9,9 @@ use Signify\Models\S3Video;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
+/**
+ * Model Admin for managing S3Videos and S3Buckets
+ */
 class VideoAdmin extends ModelAdmin
 {
 
