@@ -5,6 +5,7 @@ namespace Signify\Models;
 
 use Signify\Forms\URLField;
 use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
 
@@ -37,7 +38,7 @@ class S3Bucket extends DataObject
 
     private static $default_sort = 'Sort ASC';
 
-    public function getCMSFields()
+    public function getCMSFields() : FieldList
     {
         $fields = parent::getCMSFields();
         $fields->removeByName([
@@ -64,7 +65,7 @@ class S3Bucket extends DataObject
         return $validator;
     }
 
-    public function getBucketLink()
+    public function getBucketLink() : string
     {
         return $this->Domain;
     }
