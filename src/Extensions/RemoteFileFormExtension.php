@@ -18,9 +18,12 @@ class RemoteFileFormExtension extends Extension
     
     public function updateForm(Form $form, $controller, $name, $context)
     {
+        $fields = $form->Fields();
         if ($context['type'] === 'create') {
-            $form->Fields()->dataFieldByName('Url')->addExtraClass('js-url-embed-field');
-            $form->Fields()->insertAfter(
+            $fields
+                ->dataFieldByName('Url')
+                ->addExtraClass('js-url-embed-field');
+            $fields->insertAfter(
                 'Url',
                 DropdownField::create(
                     'UrlAws',
