@@ -102,7 +102,7 @@ class S3Video extends DataObject
         return $validator;
     }
 
-    public function getVideoLink(): string
+    public function getVideoLink(): ?string
     {
         if ($this->Bucket()->getBucketLink() && $this->ObjectKey) {
             $parts = [
@@ -111,5 +111,6 @@ class S3Video extends DataObject
             ];
             return join('/', $parts);
         }
+        return null;
     }
 }
