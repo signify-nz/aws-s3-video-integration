@@ -65,7 +65,7 @@ class S3Bucket extends DataObject
         return $validator;
     }
 
-    public function getBucketLink() : string
+    public function getBucketLink(): ?string
     {
         return $this->Domain;
     }
