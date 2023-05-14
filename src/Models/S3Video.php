@@ -38,7 +38,7 @@ class S3Video extends DataObject
         'Bucket' => S3Bucket::class,
     ];
 
-    public function getCMSFields() : FieldList
+    public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
 
@@ -102,7 +102,7 @@ class S3Video extends DataObject
         return $validator;
     }
 
-    public function getVideoLink() : string
+    public function getVideoLink(): string
     {
         if ($this->Bucket()->getBucketLink() && $this->ObjectKey) {
             $parts = [
