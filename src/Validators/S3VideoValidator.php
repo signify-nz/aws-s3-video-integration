@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Signify\Validators;
 
 use SilverStripe\Forms\RequiredFields;
@@ -13,7 +15,7 @@ use SilverStripe\Forms\RequiredFields;
  */
 class S3VideoValidator extends RequiredFields
 {
-    public function php($data)
+    public function php($data): bool
     {
         $valid = parent::php($data);
 

@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Signify\Forms;
 
+use ArrayAccess;
 use SilverStripe\Forms\DropdownField;
 use Signify\Models\S3Video;
 
@@ -13,17 +15,19 @@ use Signify\Models\S3Video;
 class S3DropdownField extends DropdownField
 {
     public function __construct(
-        $name,
-        $title = null,
-        $source = null,
-        $value = "",
+        string $name,
+        string|null $title = null,
+        array|ArrayAccess $source = [],
+        mixed $value = null,
     ) {
-        $source = $source ?? S3Video::get()->map('ID', 'Name')->toArray();
-                
+        if (empty($source)) {
+            $source = S3Video::get()->map('ID', 'Name')->toArray();
+        }
+
         $this->setDescription(
             '<em><a href="admin/videos/" target="__blank">'
             . 'Add or edit videos '
-            . '<span class="font-icon-external-link"></a><em>'
+            . '<span class="font-icon-external-link"></a></em>'
         );
         $this->setEmptyString('--Select Video--');
 

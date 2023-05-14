@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Signify\Admins;
 
 use SilverStripe\Admin\ModelAdmin;
@@ -7,24 +9,19 @@ use Signify\Models\S3Video;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
+/**
+ * Model Admin for managing S3Videos and S3Buckets
+ */
 class VideoAdmin extends ModelAdmin
 {
-    /**
-     * @var array
-     */
+
     private static $managed_models = [
         S3Video::class => ['title' => 'Videos'],
         S3Bucket::class => ['title' => 'S3 Buckets'],
     ];
 
-    /**
-     * @var string
-     */
     private static $url_segment = 'videos';
 
-    /**
-     * @var string
-     */
     private static $menu_title = 'Videos';
 
     protected function getGridFieldConfig(): GridFieldConfig

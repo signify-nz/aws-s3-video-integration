@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Signify\Extensions;
 
@@ -8,20 +9,24 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\Form;
 
 /**
-* Extends the form used for remote files add in TinyMCE field
-*
-* Add option to select S3Video object instead of entering URL
-*/
+ * Extends the form used for remote files add in TinyMCE field
+ *
+ * Add option to select S3Video object instead of entering URL
+ */
 class RemoteFileFormExtension extends Extension
 {
+    
     public function updateForm(Form $form, $controller, $name, $context)
     {
+        $fields = $form->Fields();
         if ($context['type'] === 'create') {
-            $form->Fields()->dataFieldByName('Url')->addExtraClass('js-url-embed-field');
-            $form->Fields()->insertAfter(
+            $fields
+                ->dataFieldByName('Url')
+                ->addExtraClass('js-url-embed-field');
+            $fields->insertAfter(
                 'Url',
                 DropdownField::create(
-                    'Url_Aws',
+                    'UrlAws',
                     'Select AWS hosted video',
                     S3Video::get()->map('VideoLink', 'Name')
                 )->setEmptyString('-- Select AWS Hosted Video --')

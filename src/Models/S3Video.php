@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Signify\Models;
 
@@ -6,10 +7,14 @@ use Signify\Validators\S3VideoValidator;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
+/**
+ * An AWS S3 Video
+ */
 class S3Video extends DataObject
 {
     private static $table_name = 'S3Video';
@@ -24,22 +29,16 @@ class S3Video extends DataObject
         Versioned::class,
     ];
 
-    /**
-     * @var array
-     */
     private static $db = [
         'Name' => 'Varchar(255)',
         'ObjectKey' => 'Varchar(255)',
     ];
 
-    /**
-     * @var array
-     */
     private static $has_one = [
         'Bucket' => S3Bucket::class,
     ];
 
-    public function getCMSFields()
+    public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
 
@@ -62,7 +61,6 @@ class S3Video extends DataObject
             'ObjectKey',
             'BucketID',
         ]);
-
 
         if (S3Bucket::get()->count() === 1) {
             $bucket->addExtraClass('hidden');
@@ -104,7 +102,7 @@ class S3Video extends DataObject
         return $validator;
     }
 
-    public function getVideoLink()
+    public function getVideoLink(): ?string
     {
         if ($this->Bucket()->getBucketLink() && $this->ObjectKey) {
             $parts = [
@@ -113,5 +111,6 @@ class S3Video extends DataObject
             ];
             return join('/', $parts);
         }
+        return null;
     }
 }

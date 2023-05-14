@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Signify\Forms;
 
@@ -31,7 +32,7 @@ class URLField extends TextField
      * @param Validator $validator
      * @return bool
      */
-    public function validate($validator)
+    public function validate($validator): bool
     {
         // If no value is set, then URL cannot be invalid
         if (!$this->value) {

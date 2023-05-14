@@ -1,12 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace Signify\Models;
 
 use Signify\Forms\URLField;
 use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
 
+/**
+ * An AWS S3 Bucket
+ */
 class S3Bucket extends DataObject
 {
 
@@ -18,17 +23,11 @@ class S3Bucket extends DataObject
 
     private static $description = 'Connection details for an AWS S3 bucket';
 
-    /**
-     * @var array
-     */
     private static $db = [
         'Domain' => 'Varchar(255)',
         'Sort' => 'Int'
     ];
 
-    /**
-     * @var array
-     */
     private static $has_many = [
         'Videos' => S3Video::class
     ];
@@ -39,7 +38,7 @@ class S3Bucket extends DataObject
 
     private static $default_sort = 'Sort ASC';
 
-    public function getCMSFields()
+    public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
         $fields->removeByName([
@@ -66,7 +65,7 @@ class S3Bucket extends DataObject
         return $validator;
     }
 
-    public function getBucketLink()
+    public function getBucketLink(): ?string
     {
         return $this->Domain;
     }
