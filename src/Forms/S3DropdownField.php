@@ -27,7 +27,7 @@ class S3DropdownField extends DropdownField
         $this->setDescription(
             '<em><a href="admin/videos/" target="__blank">'
             . 'Add or edit videos '
-            . '<span class="font-icon-external-link"></a><em>'
+            . '<span class="font-icon-external-link"></a></em>'
         );
         $this->setEmptyString('--Select Video--');
 
