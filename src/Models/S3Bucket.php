@@ -38,7 +38,7 @@ class S3Bucket extends DataObject
 
     private static $default_sort = 'Sort ASC';
 
-    public function getCMSFields() : FieldList
+    public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
         $fields->removeByName([
