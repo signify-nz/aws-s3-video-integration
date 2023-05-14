@@ -32,7 +32,7 @@ class URLField extends TextField
      * @param Validator $validator
      * @return bool
      */
-    public function validate($validator) : bool
+    public function validate($validator): bool
     {
         // If no value is set, then URL cannot be invalid
         if (!$this->value) {
