@@ -8,9 +8,9 @@
         {"name": "Signify","homepage": "http://signify.co.nz"}
     ],
     "require": {
-        "silverstripe/framework": "^4",
-        "unclecheese/display-logic": "^2",
-        "symbiote/silverstripe-gridfieldextensions": "^3"
+        "silverstripe/framework": "^5",
+        "unclecheese/display-logic": "^3",
+        "symbiote/silverstripe-gridfieldextensions": "^4"
     },
     "extra": {
         "expose": [
