@@ -3,7 +3,8 @@
 CMS management for AWS S3 videos and buckets. Features to assist with integration of S3 videos.
 
 ## Requirements
-* [SilverStripe CMS ^4](https://github.com/silverstripe/silverstripe-cms)
+* [SilverStripe CMS ^5](https://github.com/silverstripe/silverstripe-cms)
+* For SilverStripe 4 please see the [1.x release line](https://github.com/signify-nz/aws-s3-video-integration/tree/1.0)
 
 ## Install
 
