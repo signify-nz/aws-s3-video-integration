@@ -126,7 +126,7 @@ class S3Video extends DataObject
             return $extended;
         }
 
-        // Access locale admin permission
+        // Access video admin permission
         return VideoAdmin::singleton()->canView($member);
     }
 
@@ -141,7 +141,7 @@ class S3Video extends DataObject
             return $extended;
         }
 
-        // Access locale admin permission
+        // Access video admin permission
         return VideoAdmin::singleton()->canView($member);
     }
 
@@ -156,7 +156,7 @@ class S3Video extends DataObject
             return $extended;
         }
 
-        // Access locale admin permission
+        // Access video admin permission
         return VideoAdmin::singleton()->canView($member);
     }
 
@@ -173,7 +173,7 @@ class S3Video extends DataObject
             return $extended;
         }
 
-        // Access locale admin permission
+        // Access video admin permission
         return VideoAdmin::singleton()->canView($member);
     }
 }
