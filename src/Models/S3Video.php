@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Signify\Models;
 
+use Signify\Admins\VideoAdmin;
 use Signify\Validators\S3VideoValidator;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\CompositeValidator;
@@ -112,5 +113,67 @@ class S3Video extends DataObject
             return join('/', $parts);
         }
         return null;
+    }
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+
+        // Access locale admin permission
+        return VideoAdmin::singleton()->canView($member);
+    }
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canEdit($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+
+        // Access locale admin permission
+        return VideoAdmin::singleton()->canView($member);
+    }
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canDelete($member = null)
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+
+        // Access locale admin permission
+        return VideoAdmin::singleton()->canView($member);
+    }
+
+    /**
+     * @param Member $member
+     * @param array $context Additional context-specific data which might
+     * affect whether (or where) this object could be created.
+     * @return boolean
+     */
+    public function canCreate($member = null, $context = [])
+    {
+        $extended = $this->extendedCan(__FUNCTION__, $member, $context);
+        if ($extended !== null) {
+            return $extended;
+        }
+
+        // Access locale admin permission
+        return VideoAdmin::singleton()->canView($member);
     }
 }
