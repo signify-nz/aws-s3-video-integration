@@ -31,6 +31,9 @@ CMS menu 'Videos' option to create and manage AWS S3 Videos and Buckets.
 If only one S3 bucket has been created, the AWS video hides the bucket selection field
 and will automatically select that bucket when saving/publishing.
 
+Permissions to view, edit, create, and delete both buckets and videos are extendable,
+but default to using the "Access to 'AWS Videos' section" permission.
+
 ## S3DropdownField
 
 Can be used as part of a custom implementation for AWS videos.
