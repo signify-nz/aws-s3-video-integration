@@ -39,7 +39,7 @@ but default to using the "Access to 'AWS Videos' section" permission.
 Can be used as part of a custom implementation for AWS videos.
 
 Creates a CMS dropdown field with:
-* AWS S3 videos as the source 
+* AWS S3 videos as the source
 * Field description contains a link to the 'Videos' CMS menu option.
 
 Example:
@@ -63,7 +63,62 @@ SilverStripe\Admin\LeftAndMain:
   extensions:
     - Signify\Extensions\AwsVideoLeftAndMainExtension
 ```
-* Use the wysiwyg editor's "Insert media via URL" option. 
-* Below the "Embed URL" input will be a dropdown menu to select an AWS video. 
+* Use the wysiwyg editor's "Insert media via URL" option.
+* Below the "Embed URL" input will be a dropdown menu to select an AWS video.
 * Selecting a video will fill the URL input with the link for the AWS video.
 
+### (Optional) Improved wysiwyg content editor integration
+
+If a video file is loaded via the "Insert media via URL" option", the entire
+video is loaded into memory due to how Silverstripe is handling these embeds.
+
+This can cause memory limit issues for even reasonable sized video files.
+This module includes a video friendly embed container and embed shortcode
+that can optionally override the default ones to fix this issue.
+
+Enabling these classes will also:
+* Dynamically add S3 Bucket domains to `domains_excluded_from_sandboxing`,
+which will remove the iFrame around S3 Bucket videos in Silverstripe 5.4+.
+* Have a nicer (but still static) thumbnail for video files in TinyMCE.
+* Have a more appropriate default width/height.
+
+Enable by using the Injector service to override the core Embeddable class:
+
+```yml
+---
+Name: videos
+After:
+  - coreoembed
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\View\Embed\Embeddable:
+    class: Signify\Embeds\VideoFriendlyEmbedContainer
+```
+
+And override the default embed shortcode parser in _config.php:
+
+```php
+use Signify\Views\Shortcodes\VideoFriendlyEmbedShortcodeProvider;
+use SilverStripe\View\Parsers\ShortcodeParser;
+
+ShortcodeParser::get('default')
+    ->register('embed', [VideoFriendlyEmbedShortcodeProvider::class, 'handle_shortcode']);
+```
+
+If you want everything enabled, your YML config will look something this:
+```yml
+---
+Name: videos
+After:
+  - coreoembed
+---
+SilverStripe\AssetAdmin\Forms\RemoteFileFormFactory:
+  extensions:
+    - Signify\Extensions\RemoteFileFormExtension
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - Signify\Extensions\AwsVideoLeftAndMainExtension
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\View\Embed\Embeddable:
+    class: Signify\Embeds\VideoFriendlyEmbedContainer
+```
