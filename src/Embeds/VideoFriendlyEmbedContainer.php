@@ -94,7 +94,7 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
     }
 
     /**
-     * Get embed name
+     * Get embed name.
      */
     public function getName(): string
     {
@@ -105,7 +105,7 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
     }
 
     /**
-     * Direct
+     * Get embed type.
      */
     public function getType(): string
     {
