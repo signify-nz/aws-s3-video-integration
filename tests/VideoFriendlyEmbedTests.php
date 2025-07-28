@@ -43,6 +43,7 @@ class VideoFriendlyEmbedTests extends SapphireTest
             'embed'
         );
 
+        $this->assertStringNotContainsString('<iframe', $shortcodeResult);
         $this->assertStringContainsString('<video', $shortcodeResult);
         $this->assertStringContainsString('controls', $shortcodeResult);
         $this->assertStringContainsString($url, $shortcodeResult);
