@@ -90,9 +90,7 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $cache = Injector::inst()->get(CacheInterface::class . '.videoEmbeds');
         $cache->delete('videoDomains');
 
-        $bucket = S3Bucket::create();
-        $bucket->Domain = 'https://signify.co.nz';
-        $bucket->write();
+        $bucket = $this->createTestS3Bucket();
 
         $method = new \ReflectionMethod(VideoFriendlyEmbedShortcodeProvider::class, 'updateDomainsExcludedFromSandboxing');
         $method->setAccessible(true);
@@ -104,6 +102,31 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $this->assertNotEmpty($domains);
 
         $bucket->delete();
+    }
+
+    public function testGetHeightThrowsExceptionForInvalidAspectRatio()
+    {
+        VideoFriendlyEmbedContainer::config()->set('aspect_ratio_height', 5);
+        VideoFriendlyEmbedContainer::config()->set('aspect_ratio_width', 0);
+
+        $embed = new VideoFriendlyEmbedContainer('https://signify.co.nz/video.mp4');
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid aspect ratio');
+
+        $embed->getHeight();
+    }
+
+    public function testGetHeightCalculation()
+    {
+        VideoFriendlyEmbedContainer::config()->set('aspect_ratio_height', 9);
+        VideoFriendlyEmbedContainer::config()->set('aspect_ratio_width', 16);
+        VideoFriendlyEmbedContainer::config()->set('direct_video_width', 640);
+
+        $embed = new VideoFriendlyEmbedContainer('https://signify.co.nz/video.mp4');
+
+        $height = $embed->getHeight();
+        $this->assertEquals(360, $height);
     }
 
     protected function createTestS3Bucket(): S3Bucket
