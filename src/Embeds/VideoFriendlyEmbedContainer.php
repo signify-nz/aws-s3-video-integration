@@ -45,7 +45,7 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
      * @config
      * @var array
      */
-    private static array $direct_video_extensions  = ['mp4','webm','ogg'];
+    private static array $direct_video_extensions = ['mp4','webm','ogg'];
 
     /**
      * @var string
