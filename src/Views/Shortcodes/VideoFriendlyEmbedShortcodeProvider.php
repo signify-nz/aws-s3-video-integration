@@ -21,7 +21,7 @@ class VideoFriendlyEmbedShortcodeProvider extends EmbedShortcodeProvider impleme
 {
     use Configurable;
 
-   /**
+    /**
      * Cache time-to-live (TTL) in seconds for video domain caching.
      *
      * This controls how long the list of video domains (e.g. S3 buckets)
