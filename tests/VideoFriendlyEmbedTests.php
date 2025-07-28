@@ -21,7 +21,10 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $directVideoUrl = 'https://signify.co.nz/video.mp4';
         $container = new VideoFriendlyEmbedContainer($directVideoUrl);
         $this->assertTrue($container->isDirectVideo());
+    }
 
+    public function testNonDirectVideoIsDetected()
+    {
         $nonVideoUrl = 'https://signify.co.nz/video.mp3';
         $container = new VideoFriendlyEmbedContainer($nonVideoUrl);
         $this->assertFalse($container->isDirectVideo());
@@ -29,9 +32,7 @@ class VideoFriendlyEmbedTests extends SapphireTest
 
     public function testHandleShortcodeReturnsVideoMarkupForDirectVideo()
     {
-        $bucket = S3Bucket::create();
-        $bucket->Domain = 'https://signify.co.nz';
-        $bucket->write();
+        $bucket = $this->createTestS3Bucket();
 
         // Check that video from sandbox excluded domain returns a <video>.
         $url = 'https://signify.co.nz/video.mp4';
@@ -47,6 +48,24 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $this->assertStringContainsString('<video', $shortcodeResult);
         $this->assertStringContainsString('controls', $shortcodeResult);
         $this->assertStringContainsString($url, $shortcodeResult);
+
+        // Check that video from non-sandbox excluded domain returns an <iframe>.
+        $url = 'https://signify.nz/video.mp4';
+        $shortcodeResult = VideoFriendlyEmbedShortcodeProvider::handle_shortcode(
+            ['url' => $url],
+            '',
+            null,
+            'embed'
+        );
+
+        $this->assertStringContainsString('<iframe', $shortcodeResult);
+
+        $bucket->delete();
+    }
+
+    public function testHandleShortcodeReturnsIFrameMarkupForNonDirectVideo()
+    {
+        $bucket = $this->createTestS3Bucket();
 
         // Check that video from non-sandbox excluded domain returns an <iframe>.
         $url = 'https://signify.nz/video.mp4';
@@ -85,5 +104,14 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $this->assertNotEmpty($domains);
 
         $bucket->delete();
+    }
+
+    protected function createTestS3Bucket(): S3Bucket
+    {
+        $bucket = S3Bucket::create();
+        $bucket->Domain = 'https://signify.co.nz';
+        $bucket->write();
+
+        return $bucket;
     }
 }
