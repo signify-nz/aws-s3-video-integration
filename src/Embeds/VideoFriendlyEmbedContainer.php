@@ -40,6 +40,14 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
     private static int $aspect_ratio_width = 16;
 
     /**
+     * Video file extensions that will support the 'friendly' video embed behaviour.
+     *
+     * @config
+     * @var array
+     */
+    private static array $direct_video_extensions  = ['mp4','webm','ogg'];
+
+    /**
      * @var string
      */
     protected string $embedUrl;
@@ -145,6 +153,9 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
      */
     public function isDirectVideo(): bool
     {
-        return preg_match('/\.(mp4|webm|ogg)$/i', $this->embedUrl) === 1;
+        $extensions = self::config()->get('direct_video_extensions');
+        $pattern = '/\.(' . implode('|', $extensions) . ')$/i';
+
+        return preg_match($pattern, $this->embedUrl) === 1;
     }
 }
