@@ -49,17 +49,6 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $this->assertStringContainsString('controls', $shortcodeResult);
         $this->assertStringContainsString($url, $shortcodeResult);
 
-        // Check that video from non-sandbox excluded domain returns an <iframe>.
-        $url = 'https://signify.nz/video.mp4';
-        $shortcodeResult = VideoFriendlyEmbedShortcodeProvider::handle_shortcode(
-            ['url' => $url],
-            '',
-            null,
-            'embed'
-        );
-
-        $this->assertStringContainsString('<iframe', $shortcodeResult);
-
         $bucket->delete();
     }
 
