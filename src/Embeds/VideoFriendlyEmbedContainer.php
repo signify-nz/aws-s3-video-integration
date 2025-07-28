@@ -67,8 +67,17 @@ class VideoFriendlyEmbedContainer extends EmbedContainer
     {
         if ($this->isDirectVideo()) {
             $width = $this->getWidth();
-            $heightRatio = self::config()->get('aspect_ratio_height');
-            $widthRatio = self::config()->get('aspect_ratio_width');
+            $heightRatio = (int) self::config()->get('aspect_ratio_height');
+            $widthRatio = (int) self::config()->get('aspect_ratio_width');
+
+            if ($heightRatio <= 0 || $widthRatio <= 0) {
+                throw new \InvalidArgumentException(sprintf(
+                'Invalid aspect ratio config: aspect_ratio_height=%d, ' .
+                'aspect_ratio_width=%d. Both must be positive integers.',
+                    $heightRatio,
+                    $widthRatio
+                ));
+            }
             return (int)($width * $heightRatio / $widthRatio);
         }
 
