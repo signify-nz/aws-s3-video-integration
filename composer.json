@@ -14,7 +14,8 @@
     },
     "extra": {
         "expose": [
-            "js"
+            "js",
+            "images"
         ]
     }
 }
