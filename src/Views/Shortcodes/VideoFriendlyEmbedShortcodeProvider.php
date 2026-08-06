@@ -104,7 +104,6 @@ class VideoFriendlyEmbedShortcodeProvider extends EmbedShortcodeProvider impleme
     {
         $reflection = new \ReflectionClass(get_parent_class(static::class));
         $property = $reflection->getProperty('extractorUrl');
-        $property->setAccessible(true);
         $property->setValue(null, $url);
     }
 }

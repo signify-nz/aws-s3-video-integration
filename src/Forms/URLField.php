@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Signify\Forms;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\TextField;
 
 /**
@@ -29,38 +30,35 @@ class URLField extends TextField
     /**
      * Validate this field
      *
-     * @param Validator $validator
      * @return bool
      */
-    public function validate($validator): bool
+    public function validate(): ValidationResult
     {
-        // If no value is set, then URL cannot be invalid
-        if (!$this->value) {
-            return true;
-        }
+        $this->beforeExtending('updateValidate', function (ValidationResult $result) {
+            // If no value is set, then URL cannot be invalid
+            if (!$this->value) {
+                return;
+            }
 
-        $res = parent::validate($validator);
+            // Ensure the URL has protocol
+            $protRe = '/https?:\/\/.*/m';
+            if (!preg_match($protRe, $this->value)) {
+                $this->value = 'https://' . $this->value;
+            }
 
-        // Ensure the URL has protocol
-        $protRe = '/https?:\/\/.*/m';
-        if (!preg_match($protRe, $this->value)) {
-            $this->value = 'https://' . $this->value;
-        }
+            $urlRe = '/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&\'\(\)\*\+,;=.]+$/m';
+            if (!preg_match($urlRe, $this->value)) {
+                $result->addFieldError(
+                    $this->getName(),
+                    _t(
+                        'App\\Field\\URLField.VALIDATEURL',
+                        'The value for {name} must be a valid URL',
+                        ['name' => $this->getName()]
+                    )
+                );
+            }
+        });
 
-        $urlRe = '/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&\'\(\)\*\+,;=.]+$/m';
-        if (!preg_match($urlRe, $this->value)) {
-            $validator->validationError(
-                $this->name,
-                _t(
-                    'App\\Field\\URLField.VALIDATEURL',
-                    'The value for {name} must be a valid URL',
-                    ['name' => $this->getName()]
-                ),
-                'validation'
-            );
-            $res = false;
-        }
-
-        return !$res ? false : true;
+        return parent::validate();
     }
 }

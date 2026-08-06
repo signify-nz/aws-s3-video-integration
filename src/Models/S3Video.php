@@ -6,7 +6,7 @@ namespace Signify\Models;
 use Signify\Admins\VideoAdmin;
 use Signify\Validators\S3VideoValidator;
 use SilverStripe\Forms\CompositeField;
-use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\LiteralField;

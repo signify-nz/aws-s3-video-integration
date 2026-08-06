@@ -8,14 +8,25 @@
         {"name": "Signify","homepage": "http://signify.co.nz"}
     ],
     "require": {
-        "silverstripe/framework": "^5",
-        "unclecheese/display-logic": "^3",
-        "symbiote/silverstripe-gridfieldextensions": "^4"
+        "silverstripe/framework": "^6",
+        "unclecheese/display-logic": "^4",
+        "symbiote/silverstripe-gridfieldextensions": "^5"
     },
     "extra": {
         "expose": [
             "js",
             "images"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true
+        }
+    },
+    "require-dev": {
+        "silverstripe/sqlite3": "^4.0",
+        "phpunit/phpunit": "^11",
+        "silverstripe/cms": "^6.2"
     }
 }
