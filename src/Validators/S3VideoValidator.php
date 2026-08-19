@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Signify\Validators;
 
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 /**
  * Validator for the {@link Signify\Models\S3Video} object
@@ -13,7 +13,7 @@ use SilverStripe\Forms\RequiredFields;
  * automatically linking when there is only one available Bucket would no longer work correctly.
  *
  */
-class S3VideoValidator extends RequiredFields
+class S3VideoValidator extends RequiredFieldsValidator
 {
     public function php($data): bool
     {

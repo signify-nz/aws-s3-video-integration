@@ -9,6 +9,7 @@ use Signify\Views\Shortcodes\VideoFriendlyEmbedShortcodeProvider;
 use Signify\Embeds\VideoFriendlyEmbedContainer;
 use Psr\SimpleCache\CacheInterface;
 use Signify\Models\S3Bucket;
+use SilverStripe\View\Embed\Embeddable;
 use SilverStripe\View\Shortcodes\EmbedShortcodeProvider;
 
 /**
@@ -16,6 +17,22 @@ use SilverStripe\View\Shortcodes\EmbedShortcodeProvider;
  */
 class VideoFriendlyEmbedTests extends SapphireTest
 {
+    /**
+     * These tests write S3Bucket records, so the test database schema must be
+     * built. Without this, SapphireTest uses an empty temp DB with no tables.
+     */
+    protected $usesDatabase = true;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Activate the module's opt-in Embeddable override for these tests.
+        // SapphireTest nests the Injector, so this is auto-reverted in tearDown.
+        Injector::inst()->load([
+            Embeddable::class => ['class' => VideoFriendlyEmbedContainer::class],
+        ]);
+    }
+
     public function testDirectVideoIsDetected()
     {
         $directVideoUrl = 'https://signify.co.nz/video.mp4';
@@ -82,7 +99,6 @@ class VideoFriendlyEmbedTests extends SapphireTest
         $bucket = $this->createTestS3Bucket();
 
         $method = new \ReflectionMethod(VideoFriendlyEmbedShortcodeProvider::class, 'updateDomainsExcludedFromSandboxing');
-        $method->setAccessible(true);
         $method->invoke(null);  // null because it is static
 
         $domains = Config::inst()->get(EmbedShortcodeProvider::class, 'domains_excluded_from_sandboxing');

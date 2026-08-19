@@ -11,7 +11,7 @@ use SilverStripe\View\Requirements;
  */
 class AwsVideoLeftAndMainExtension extends Extension
 {
-    public function init()
+    public function onInit()
     {
         Requirements::javascript('signify-nz/aws-s3-video-integration:js/aws-video-embed.js');
     }

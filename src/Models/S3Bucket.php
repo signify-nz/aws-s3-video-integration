@@ -5,9 +5,9 @@ namespace Signify\Models;
 
 use Signify\Admins\VideoAdmin;
 use Signify\Forms\URLField;
-use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\ORM\DataObject;
 
 /**
@@ -58,7 +58,7 @@ class S3Bucket extends DataObject
         $validator = parent::getCMSCompositeValidator();
 
         $validator->addValidator(
-            RequiredFields::create(
+            RequiredFieldsValidator::create(
                 'Domain'
             )
         );
